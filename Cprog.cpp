@@ -32,14 +32,30 @@ void Cprog::printMenu(){
 
 void Cprog::threeBody(){
     
-    //loadFile();
+    string threeBodyFile = "data.txt"; 
+    loadFile(threeBodyFile);
 
-    //Run the math
-    //Save the finished file output
+    cout << "\nTime Step in seconds:";
+	cin >> timeStep;
+    cout <<"\nHow long should we run this simulation for? (In Days):";
+    cin >> totalDays;
+    cout << "\n";
+
+    int totalLoops = 0;
+
+    totalLoops  = (totalDays*Day_Second_Converstion)/timeStep;
+
+
+    for (int i = 0; i < totalLoops; i++) {
+        computeAccelerations();
+        computeVelocities();
+		computePositions();
+ 	}
+
 }
 void Cprog::nBody(){
 
-	loadFile();
+	loadFileWithUserInput();
     cout << "\nTime Step in seconds:";
 	cin >> timeStep;
     cout <<"\nHow long should we run this simulation for? (In Days):";
@@ -64,18 +80,22 @@ void Cprog::saveFile(){
     //save the data from the work done
 }
 
-void Cprog::loadFile(){
-    Cplanet planet;
+void Cprog::loadFileWithUserInput(){
     string fileName;
     string fileType = ".txt";
-
-    string loadedData;
-	string skippedData;
-
     cout << "\nName of File\n";
     cin >> fileName;
     fileName.append(fileType);
-    
+    loadFile(fileName);
+}
+
+
+
+
+void Cprog::loadFile(string fileName){
+    Cplanet planet;
+    string loadedData;
+	string skippedData;
 
     this->planets.clear();
     ifstream saved(fileName);

@@ -10,9 +10,10 @@ class Cprog{
     void threeBody();
     void nBody();
     void saveFile();
-    void loadFile();
+    void loadFile(string);
+    void loadFileWithUserInput();
 
-    float mod();
+
     void computeAccelerations();
     void computeVelocities();
     void computePositions();
