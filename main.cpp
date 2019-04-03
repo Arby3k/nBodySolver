@@ -7,11 +7,6 @@
 #include <vector>
 #include <cstdlib>
 
-// OpenCV Include
-//#include "opencv.hpp"
-
-// OpenCV Library
-#pragma comment(lib,".\\opencv\\lib\\opencv_world310d.lib")
 
 using namespace std;
 #define PI 3.14159265358979

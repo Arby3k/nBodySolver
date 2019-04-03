@@ -19,6 +19,7 @@ class Cprog{
 
     int bodies;
 	int timeStep;
+    int totalDays;
 
     private:
     std::vector<Cplanet> planets;

@@ -14,7 +14,8 @@
 #define G  6.67384e-11            // gravitational constant in m^3/kg * s^2;
 #define M_EARTH 5.97219e24        // earth mass [kg]
 #define R_EARTH 6.371e6           // earth radius [m]
-#define T_GEOSTATIC  86164.0905;  // earth rotational period [s]
+#define T_GEOSTATIC  86164.0905         // earth rotational period [s]
+#define Day_Second_Converstion 86400    // Day to second conversion
 
 using namespace std;
 
@@ -41,26 +42,21 @@ void Cprog::nBody(){
 	loadFile();
     cout << "\nTime Step in seconds:";
 	cin >> timeStep;
-    cout <<"\n";
-//	cout << "X Acceleration: " << planets[0].xacc << "\n";
-//	cout << "X Acceleration: " << planets[0].yacc << "\n";
-//	cout << "X Velocity: " << planets[0].xvel << "\n";
-//	cout << "Y Velocity: " << planets[0].yvel << "\n";
-//	cout << "X Position: " << planets[0].xpos << "\n";
-//	cout << "Y Position: " << planets[0].ypos << "\n";
+    cout <<"\nHow long should we run this simulation for? (In Days):";
+    cin >> totalDays;
+    cout << "\n";
+
+    int totalLoops = 0;
+
+    totalLoops  = (totalDays*Day_Second_Converstion)/timeStep;
 
 
-    cout << "X  Earth" << "    " << "Y  Earth\n";
-    cout << planets[0].xpos << "     " << planets[0].ypos << "\n";
-
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < totalLoops; i++) {
         computeAccelerations();
         computeVelocities();
 		computePositions();
-        cout << planets[0].xpos << "     " << planets[0].ypos << "\n";
-	}
+ 	}
 	
-	//Run the math
 	//Save the finished file output
 }
 
@@ -111,6 +107,9 @@ void Cprog::loadFile(){
             getline(saved, loadedData, ' ');
             planet.yvel = std::stof(loadedData);
 			getline(saved, skippedData);
+
+            planet.xacc = 0;
+            planet.yacc = 0;
             
             this->planets.push_back(planet);
         }
@@ -136,6 +135,8 @@ void Cprog::computeVelocities() {
     for (int i = 0; i < bodies; ++i) {
         planets[i].xvel = planets[i].xvel + (planets[i].xacc * timeStep);
         planets[i].yvel = planets[i].yvel + (planets[i].yacc * timeStep);
+        planets[i].xacc = 0;
+        planets[i].yacc = 0;
     }
 }
 
