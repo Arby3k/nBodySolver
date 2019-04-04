@@ -69,14 +69,16 @@ void Cprog::nBody(){
 
 	loadFileWithUserInput();
     cout << "\nTime Step in days:";
-	cin >> timeStep;
+	cin >> timeStepDays;
     cout <<"\nHow long should we run this simulation for? (In Years):";
     cin >> totalYears;
     cout << "\n";
 
     int totalLoops = 0;
 
-    totalLoops  = (totalYears*365)/timeStep;
+    totalLoops  = (totalYears*365)/timeStepDays;
+
+    timeStep = timeStepDays*Day_Second_Converstion;
 
     for(int i = 0; i <bodies; i++){
         planets[i].xposSave.push_back(planets[i].xpos);

@@ -22,6 +22,7 @@ class Cprog{
 	int timeStep;
     int totalDays;
 
+    int timeStepDays;
     int totalYears;
 
     private:
