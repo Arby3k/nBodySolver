@@ -9,8 +9,8 @@ class Cprog{
     void printMenu();
     void threeBody();
     void nBody();
-    void saveFile();
-    void loadFile(string);
+    void saveFile(int totalLoops);
+    void loadFile(std::string fileName);
     void loadFileWithUserInput();
 
 
@@ -21,6 +21,8 @@ class Cprog{
     int bodies;
 	int timeStep;
     int totalDays;
+
+    int totalYears;
 
     private:
     std::vector<Cplanet> planets;

@@ -34,6 +34,11 @@ void Cprog::threeBody(){
     
     string threeBodyFile = "data.txt"; 
     loadFile(threeBodyFile);
+    
+    for(int i = 0; i <bodies; i++){
+        planets[i].xposSave.push_back(planets[i].xpos);
+        planets[i].yposSave.push_back(planets[i].ypos);
+    }
 
     cout << "\nTime Step in seconds:";
 	cin >> timeStep;
@@ -45,39 +50,81 @@ void Cprog::threeBody(){
 
     totalLoops  = (totalDays*Day_Second_Converstion)/timeStep;
 
+    cout << "X pos        Y Pos\n";
+    cout << planets[0].xpos << "        " << planets[0].ypos << "\n";
+    
+   
 
     for (int i = 0; i < totalLoops; i++) {
         computeAccelerations();
         computeVelocities();
 		computePositions();
+        cout << planets[0].xposSave.back() << "        " << planets[0].yposSave.back() << "\n";
  	}
+
+    saveFile(totalLoops);
 
 }
 void Cprog::nBody(){
 
 	loadFileWithUserInput();
-    cout << "\nTime Step in seconds:";
+    cout << "\nTime Step in days:";
 	cin >> timeStep;
-    cout <<"\nHow long should we run this simulation for? (In Days):";
-    cin >> totalDays;
+    cout <<"\nHow long should we run this simulation for? (In Years):";
+    cin >> totalYears;
     cout << "\n";
 
     int totalLoops = 0;
 
-    totalLoops  = (totalDays*Day_Second_Converstion)/timeStep;
+    totalLoops  = (totalYears*365)/timeStep;
 
+    for(int i = 0; i <bodies; i++){
+        planets[i].xposSave.push_back(planets[i].xpos);
+        planets[i].yposSave.push_back(planets[i].ypos);
+    }
 
     for (int i = 0; i < totalLoops; i++) {
         computeAccelerations();
         computeVelocities();
 		computePositions();
+		cout << "running\r";
  	}
 	
-	//Save the finished file output
+	saveFile(totalLoops);
+	
 }
 
-void Cprog::saveFile(){
-    //save the data from the work done
+void Cprog::saveFile(int totalLoops){
+    
+	string fileName;
+	string fileType = ".txt";
+	std::cout << "\nName Save file\n";
+	cin >> fileName;
+	fileName.append(fileType);
+
+	ofstream saved(fileName);
+	if (!saved) {
+		std::cout << "Error saving file for output" << endl;
+		return ;
+	}
+    saved << timeStep << endl;
+    saved << bodies << endl;
+
+	for (int i = 0; i < totalLoops; i++) {
+        for(int j = 0; j < bodies; j++){
+		    saved << std::scientific << planets[j].xposSave[i] << "," << planets[j].yposSave[i];
+            if(j != bodies-1){
+                saved << ",";
+            }
+            else{
+                saved << endl;
+            }
+        }
+	}
+	cout << "File Saved\n\n";
+	saved.close();
+	return ;
+
 }
 
 void Cprog::loadFileWithUserInput(){
@@ -88,9 +135,6 @@ void Cprog::loadFileWithUserInput(){
     fileName.append(fileType);
     loadFile(fileName);
 }
-
-
-
 
 void Cprog::loadFile(string fileName){
     Cplanet planet;
@@ -142,8 +186,8 @@ void Cprog::computeAccelerations() {
     for (int i = 0; i < bodies; ++i) {
         for (int j = 0; j < bodies; ++j) {
             if (i != j) {
-                float rTemp = sqrt(pow(planets[i].xpos - planets[j].xpos ,2) + pow(planets[i].ypos - planets[j].ypos , 2));
-                float temp = G * planets[j].mass / pow(rTemp, 3);
+                double rTemp = sqrt(pow(planets[i].xpos - planets[j].xpos ,2) + pow(planets[i].ypos - planets[j].ypos , 2));
+                double temp = G * planets[j].mass / pow(rTemp, 3);
                 planets[i].xacc = planets[i].xacc + ((planets[j].xpos - planets[i].xpos) * temp);
 				planets[i].yacc = planets[i].yacc + ((planets[j].ypos - planets[i].ypos) * temp);
             }
@@ -164,6 +208,10 @@ void Cprog::computePositions() {
     for (int i = 0; i < bodies; ++i) {
         planets[i].xpos = planets[i].xpos + (planets[i].xvel * timeStep);
         planets[i].ypos = planets[i].ypos + (planets[i].yvel * timeStep);
+
+        planets[i].xposSave.push_back(planets[i].xpos);
+        planets[i].yposSave.push_back(planets[i].ypos);
+
     }
 }
 

@@ -10,13 +10,16 @@ class Cplanet {
 	friend class Cprog;
 	private:
 		
-		float xpos;
-		float ypos;
-		float xvel;
-		float yvel;
-        float mass;
-		float xacc;
-		float yacc;
+		double xpos;
+		double ypos;
+		double xvel;
+		double yvel;
+        double mass;
+		double xacc;
+		double yacc;
 		void print();
+
+		std::vector<double> xposSave;
+		std::vector<double> yposSave;
 
 };
