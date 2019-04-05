@@ -1,9 +1,2 @@
-//#include "Stdafx.h"
+// Igorable cpp file, here if we want to add functons to the planet class.
 #include "Cplanet.h"
-using namespace std;
-
-void Cplanet::print() {
-
-	cout << setw(15) << xpos << setprecision(2) << ypos << setw(10) << xvel << setw(10) << yvel;
-
-}

@@ -6,6 +6,16 @@
 #include <string>
 #include <vector>
 
+/* Class that holds planet data
+	Positions
+	Velocities
+	Accelerations
+	Mass
+
+	Also holds all previous positions
+
+*/
+
 class Cplanet {
 	friend class Cprog;
 	private:
@@ -17,8 +27,7 @@ class Cplanet {
         double mass;
 		double xacc;
 		double yacc;
-		void print();
-
+		
 		std::vector<double> xposSave;
 		std::vector<double> yposSave;
 

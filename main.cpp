@@ -1,7 +1,6 @@
-//#include "stdafx.h"
+/* Main Entry into program */
 
 #include "Cprog.h"
-
 #include <iomanip>
 #include <string>
 #include <vector>

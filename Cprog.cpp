@@ -6,7 +6,6 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <iomanip>
 #include <math.h>
 
@@ -32,7 +31,7 @@ void Cprog::printMenu(){
 
 void Cprog::threeBody(){
     
-    string threeBodyFile = "data.txt"; 
+    string threeBodyFile = "Data3Body.txt"; 
     loadFile(threeBodyFile);
     
     for(int i = 0; i <bodies; i++){
@@ -40,9 +39,9 @@ void Cprog::threeBody(){
         planets[i].yposSave.push_back(planets[i].ypos);
     }
 
-    cout << "\nTime Step in seconds:";
+    cout << "\n[Recommended 1000 seconds]\nTime Step in seconds:";
 	cin >> timeStep;
-    cout <<"\nHow long should we run this simulation for? (In Days):";
+    cout <<"\n[Recommended 20 Days]\nHow long should we run this simulation for? (In Days):";
     cin >> totalDays;
     cout << "\n";
 
@@ -51,23 +50,20 @@ void Cprog::threeBody(){
     totalLoops  = (totalDays*Day_Second_Converstion)/timeStep;
 
     cout << "X pos        Y Pos\n";
-    cout << planets[0].xpos << "        " << planets[0].ypos << "\n";
-    
-   
-
     for (int i = 0; i < totalLoops; i++) {
-        computeAccelerations();
-        computeVelocities();
-		computePositions();
-        cout << planets[0].xposSave.back() << "        " << planets[0].yposSave.back() << "\n";
+        Accelerate();
+        Velocities();
+		Positions();
+        cout << "Running\n";
  	}
 
     saveFile(totalLoops);
 
 }
+
 void Cprog::nBody(){
 
-	loadFileWithUserInput();
+    loadFileWithUserInput();
     cout << "\nTime Step in days:";
 	cin >> timeStepDays;
     cout <<"\nHow long should we run this simulation for? (In Years):";
@@ -86,10 +82,10 @@ void Cprog::nBody(){
     }
 
     for (int i = 0; i < totalLoops; i++) {
-        computeAccelerations();
-        computeVelocities();
-		computePositions();
-		cout << "running\r";
+        Accelerate();
+        Velocities();
+		Positions();
+		cout << "Running\r";
  	}
 	
 	saveFile(totalLoops);
@@ -100,7 +96,7 @@ void Cprog::saveFile(int totalLoops){
     
 	string fileName;
 	string fileType = ".txt";
-	std::cout << "\nName Save file\n";
+	std::cout << "\nName Save file (do not include '.txt')\n";
 	cin >> fileName;
 	fileName.append(fileType);
 
@@ -115,6 +111,7 @@ void Cprog::saveFile(int totalLoops){
 	for (int i = 0; i < totalLoops; i++) {
         for(int j = 0; j < bodies; j++){
 		    saved << std::scientific << planets[j].xposSave[i] << "," << planets[j].yposSave[i];
+            cout << "Saving\r";
             if(j != bodies-1){
                 saved << ",";
             }
@@ -132,7 +129,8 @@ void Cprog::saveFile(int totalLoops){
 void Cprog::loadFileWithUserInput(){
     string fileName;
     string fileType = ".txt";
-    cout << "\nName of File\n";
+    
+    cout << "\nName of File (Do not include '.txt')\n";
     cin >> fileName;
     fileName.append(fileType);
     loadFile(fileName);
@@ -146,7 +144,9 @@ void Cprog::loadFile(string fileName){
     this->planets.clear();
     ifstream saved(fileName);
     if (!saved){
-        cout <<"Error Loading data File";
+        cout <<"Error Loading data File\n";
+        cout <<"If Running 3 body, make sure 3 body file is named correctly\n";
+        cout <<"'Data3Body.txt'\n";
         return;
     }
     else{
@@ -178,13 +178,14 @@ void Cprog::loadFile(string fileName){
             planet.yacc = 0;
             
             this->planets.push_back(planet);
+            
         }
         cout <<"File Loaded \n";
         saved.close();
     }
 }
 
-void Cprog::computeAccelerations() {
+void Cprog::Accelerate() {
     for (int i = 0; i < bodies; ++i) {
         for (int j = 0; j < bodies; ++j) {
             if (i != j) {
@@ -197,7 +198,7 @@ void Cprog::computeAccelerations() {
     }
 }
 
-void Cprog::computeVelocities() {
+void Cprog::Velocities() {
     for (int i = 0; i < bodies; ++i) {
         planets[i].xvel = planets[i].xvel + (planets[i].xacc * timeStep);
         planets[i].yvel = planets[i].yvel + (planets[i].yacc * timeStep);
@@ -206,7 +207,7 @@ void Cprog::computeVelocities() {
     }
 }
 
-void Cprog::computePositions() {
+void Cprog::Positions() {
     for (int i = 0; i < bodies; ++i) {
         planets[i].xpos = planets[i].xpos + (planets[i].xvel * timeStep);
         planets[i].ypos = planets[i].ypos + (planets[i].yvel * timeStep);
