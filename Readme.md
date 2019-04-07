@@ -10,7 +10,7 @@ Newton's laws of motion allow us to calculate the postion of celestial bodies at
 
 Features:
  * Solves Preloaded 3 body system ,
- * Solves nBody system loaded through txt file,
+ * Solves nBody system loaded through txt file
  
 
 ## Usage
@@ -22,6 +22,7 @@ For both options available to the user, the user must select total time to run s
 Input text files must follow formatting as shown below 
 
 ```sh
+
 3               # number of bodies
 5.97219e24      # body 1 mass [kg]
 0.0             # body 1 initial x-pos [m]
@@ -49,12 +50,12 @@ The Output files will be output as show below. This is to allow the `planetary m
 
 
 ```sh
+
 1000
 3
 0.000000e+00,0.000000e+00,1.000000e+08,0.000000e+00,1.100000e+08,0.000000e+00
 4.018684e+02,0.000000e+00,9.996054e+07,1.996430e+06,1.099272e+08,1.397500e+06
 1.205688e+03,8.003940e+00,9.988162e+07,3.992040e+06,1.097815e+08,2.796979e+06
-
 
 ```
 X and Y positions for each time step and each body are output on a per line basis. 
