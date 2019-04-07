@@ -147,8 +147,10 @@ void Cprog::loadFile(string fileName){
         cout <<"Error Loading data File\n";
         cout <<"If Running 3 body, make sure 3 body file is named correctly\n";
         cout <<"'Data3Body.txt'\n";
-        return;
-    }
+
+		loadFileWithUserInput();
+	}
+
     else{
         getline(saved, loadedData, ' ');
         bodies = std::stoi(loadedData);
@@ -202,8 +204,8 @@ void Cprog::Velocities() {
     for (int i = 0; i < bodies; ++i) {
         planets[i].xvel = planets[i].xvel + (planets[i].xacc * timeStep);
         planets[i].yvel = planets[i].yvel + (planets[i].yacc * timeStep);
-        planets[i].xacc = 0;
-        planets[i].yacc = 0;
+        //planets[i].xacc = 0;
+        //planets[i].yacc = 0;
     }
 }
 

@@ -17,6 +17,8 @@ Features:
 
 For both options available to the user, the user must select total time to run simulation along with a timestep that will dictate the accuracy of the results. 
 
+A sample file for the solar system is also included with the name 'datasolar.txt'
+
 
 ### Input Files
 Input text files must follow formatting as shown below 
