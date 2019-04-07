@@ -40,6 +40,11 @@ int main()
 			GeoProg.nBody();
 			break;
 		}
+		case 'C':
+		case 'c': {
+			GeoProg.twoBody();
+			break;
+		}
 		case 'Q':
 		case 'q':
 			cout << "Quiting" << endl;

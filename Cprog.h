@@ -20,6 +20,10 @@ class Cprog{
     // Runs nBody simulation with user selected data file
     void nBody();
 
+    // Runs nBody simulation however is designed to run at
+    // smaller timesteps. Great for 2body simulations
+    void twoBody();
+
     // Function to save the computed data to an output file
     void saveFile(int totalLoops);
 

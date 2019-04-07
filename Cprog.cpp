@@ -24,6 +24,7 @@ void Cprog::printMenu(){
              << "******************** \n"
              << "A) 3Body \n"
              << "B) Solarsystem Sim \n"
+             << "C) 2Body \n"
              << "Q) quit \n"
              << "\nCommand: ";
 
@@ -91,6 +92,50 @@ void Cprog::nBody(){
 	saveFile(totalLoops);
 	
 }
+
+
+void Cprog::twoBody(){
+
+    loadFileWithUserInput();
+
+    cout << "\nTime Step in seconds:";
+	cin >> timeStep;
+    cout <<"\nHow long should we run this simulation for? (In Days):";
+    cin >> totalDays;
+    cout << "\n";
+
+    int totalLoops = 0;
+
+    totalLoops  = (totalDays*Day_Second_Converstion)/timeStep;
+
+ 
+    for(int i = 0; i <bodies; i++){
+        planets[i].xposSave.push_back(planets[i].xpos);
+        planets[i].yposSave.push_back(planets[i].ypos);
+    }
+
+    cout << "X Accel       Y Accel       XVel     YVel    XPos  vPos";
+
+    for (int i = 0; i < totalLoops; i++) {
+        Accelerate();
+        planets[0].xacc = 0; //Keep Earth Centered
+        planets[0].yacc = 0; //Keep Earth Centered
+
+        cout << planets[1].xacc <<"      " << planets[1].yacc <<"      ";
+
+        Velocities();
+        cout << planets[1].xvel <<"      " << planets[1].yvel <<"      ";
+
+		Positions();
+        cout << planets[1].xpos <<"      " << planets[1].ypos << "\n";
+
+		cout << "Running\r";
+ 	}
+	
+	saveFile(totalLoops);
+	
+}
+
 
 void Cprog::saveFile(int totalLoops){
     
@@ -193,8 +238,8 @@ void Cprog::Accelerate() {
             if (i != j) {
                 double rTemp = sqrt(pow(planets[i].xpos - planets[j].xpos ,2) + pow(planets[i].ypos - planets[j].ypos , 2));
                 double temp = G * planets[j].mass / pow(rTemp, 3);
-                planets[i].xacc = planets[i].xacc + ((planets[j].xpos - planets[i].xpos) * temp);
-				planets[i].yacc = planets[i].yacc + ((planets[j].ypos - planets[i].ypos) * temp);
+                planets[i].xacc = ((planets[j].xpos - planets[i].xpos) * temp);
+				planets[i].yacc = ((planets[j].ypos - planets[i].ypos) * temp);
             }
         }
     }
@@ -204,8 +249,6 @@ void Cprog::Velocities() {
     for (int i = 0; i < bodies; ++i) {
         planets[i].xvel = planets[i].xvel + (planets[i].xacc * timeStep);
         planets[i].yvel = planets[i].yvel + (planets[i].yacc * timeStep);
-        //planets[i].xacc = 0;
-        //planets[i].yacc = 0;
     }
 }
 
