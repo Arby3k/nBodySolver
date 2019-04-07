@@ -54,7 +54,7 @@ void Cprog::threeBody(){
         Accelerate();
         Velocities();
 		Positions();
-        cout << "Running\n";
+        cout << "Running\r";
  	}
 
     saveFile(totalLoops);
