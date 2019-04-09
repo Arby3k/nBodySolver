@@ -14,7 +14,7 @@
 #define M_EARTH 5.97219e24        // earth mass [kg]
 #define R_EARTH 6.371e6           // earth radius [m]
 #define T_GEOSTATIC  86164.0905         // earth rotational period [s]
-#define Day_Second_Converstion 86400    // Day to second conversion
+#define Day_Second_Converstion 86400    // Day to second conversion for loop calcualtions
 
 using namespace std;
 
@@ -22,9 +22,9 @@ void Cprog::printMenu(){
     std::cout<<"******************** \n"
              << "Planetary motion things \n"
              << "******************** \n"
-             << "A) 3Body \n"
-             << "B) Solarsystem Sim \n"
-             << "C) 2Body \n"
+             << "A) Pre Loaded 3Body \n"
+             << "B) nBody Simulation on Solar System Time Scale \n"
+             << "C) nBody Simulation on Planetary Time Scale \n"
              << "Q) quit \n"
              << "\nCommand: ";
 
@@ -93,12 +93,14 @@ void Cprog::nBody(){
 	
 }
 
-
-void Cprog::twoBody(){
+void Cprog::nBody_Planetary(){
 
     loadFileWithUserInput();
 
-    cout << "\nTime Step in seconds:";
+    cout << "\nThis Simulation keeps the first body in simlualtion locked to inital position."
+         << "\nThis is done to allow to visual geostationary orbits without main planet drifting.";
+
+    cout << "\n\nTime Step in seconds:";
 	cin >> timeStep;
     cout <<"\nHow long should we run this simulation for? (In Days):";
     cin >> totalDays;
@@ -110,6 +112,7 @@ void Cprog::twoBody(){
 
  
     for(int i = 0; i <bodies; i++){
+        //First X and Y Postions of planets put into 
         planets[i].xposSave.push_back(planets[i].xpos);
         planets[i].yposSave.push_back(planets[i].ypos);
     }
@@ -135,7 +138,6 @@ void Cprog::twoBody(){
 	saveFile(totalLoops);
 	
 }
-
 
 void Cprog::saveFile(int totalLoops){
     

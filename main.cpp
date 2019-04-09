@@ -8,13 +8,6 @@
 
 
 using namespace std;
-#define PI 3.14159265358979
-#define G  6.67384e-11            // gravitational constant in m^3/kg * s^2;
-#define M_EARTH 5.97219e24        // earth mass [kg]
-#define R_EARTH 6.371e6           // earth radius [m]
-#define T_GEOSTATIC  86164.0905;  // earth rotational period [s]
-
-
 
 int main()
 {
@@ -42,7 +35,7 @@ int main()
 		}
 		case 'C':
 		case 'c': {
-			GeoProg.twoBody();
+			GeoProg.nBody_Planetary();
 			break;
 		}
 		case 'Q':

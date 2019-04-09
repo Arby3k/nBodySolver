@@ -17,12 +17,14 @@ class Cprog{
     // Runs 3 body simulation with 'Data3Body.txt'
     void threeBody();
 
-    // Runs nBody simulation with user selected data file
+    // Runs nBody simulation with user selected data file.
+    // Designed to run at larger time steps.
+    // Great for Solar system scale simulations.
     void nBody();
 
     // Runs nBody simulation however is designed to run at
     // smaller timesteps. Great for 2body simulations
-    void twoBody();
+    void nBody_Planetary();
 
     // Function to save the computed data to an output file
     void saveFile(int totalLoops);
