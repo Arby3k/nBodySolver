@@ -95,10 +95,10 @@ void Cprog::nBody(){
 
 void Cprog::nBody_Planetary(){
 
-    loadFileWithUserInput();
-
     cout << "\nThis Simulation keeps the first body in simlualtion locked to inital position."
-         << "\nThis is done to allow to visual geostationary orbits without main planet drifting.";
+         << "\nThis is done to allow to visualize geostationary orbits without the main planet drifting.";
+
+    loadFileWithUserInput();
 
     cout << "\n\nTime Step in seconds:";
 	cin >> timeStep;
@@ -117,21 +117,18 @@ void Cprog::nBody_Planetary(){
         planets[i].yposSave.push_back(planets[i].ypos);
     }
 
-    cout << "X Accel       Y Accel       XVel     YVel    XPos  vPos\n";
+    //cout << "X Accel       Y Accel       XVel     YVel    XPos  vPos\n";
 
     for (int i = 0; i < totalLoops; i++) {
         Accelerate();
-        planets[0].xacc = 0; //Keep Earth Centered
-        planets[0].yacc = 0; //Keep Earth Centered
+        planets[0].xacc = 0; //Keep First Body Centered
+        planets[0].yacc = 0; //Keep First Body Centered
 
-        cout << planets[1].xacc <<"      " << planets[1].yacc <<"      ";
-
+        //cout << planets[2].xacc <<"      " << planets[2].yacc <<"      ";
         Velocities();
-        cout << planets[1].xvel <<"      " << planets[1].yvel <<"      ";
-
+        //cout << planets[2].xvel <<"      " << planets[2].yvel <<"      ";
 		Positions();
-        cout << planets[1].xpos <<"      " << planets[1].ypos << "\n";
-
+        //cout << planets[2].xpos <<"      " << planets[2].ypos << "\n";
 		cout << "Running\r";
  	}
 	
@@ -240,8 +237,8 @@ void Cprog::Accelerate() {
             if (i != j) {
                 double rTemp = sqrt(pow(planets[i].xpos - planets[j].xpos ,2) + pow(planets[i].ypos - planets[j].ypos , 2));
                 double temp = G * planets[j].mass / pow(rTemp, 3);
-                planets[i].xacc = ((planets[j].xpos - planets[i].xpos) * temp);
-				planets[i].yacc = ((planets[j].ypos - planets[i].ypos) * temp);
+                planets[i].xacc += ((planets[j].xpos - planets[i].xpos) * temp);
+				planets[i].yacc += ((planets[j].ypos - planets[i].ypos) * temp);
             }
         }
     }
@@ -251,6 +248,10 @@ void Cprog::Velocities() {
     for (int i = 0; i < bodies; ++i) {
         planets[i].xvel = planets[i].xvel + (planets[i].xacc * timeStep);
         planets[i].yvel = planets[i].yvel + (planets[i].yacc * timeStep);
+
+        planets[i].xacc = 0; // Reset Acceleration of body back to zero for next accleration Calculation
+        planets[i].yacc = 0; 
+
     }
 }
 
