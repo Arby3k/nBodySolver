@@ -1,5 +1,4 @@
 #pragma once
-//#include "stdafx.h"
 #include "Cplanet.h"
 #include <vector>
 #include <fstream>

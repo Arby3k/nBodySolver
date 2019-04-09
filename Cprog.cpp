@@ -112,7 +112,7 @@ void Cprog::nBody_Planetary(){
 
  
     for(int i = 0; i <bodies; i++){
-        //First X and Y Postions of planets put into 
+        //First X and Y Postions of planets put into respective vectors
         planets[i].xposSave.push_back(planets[i].xpos);
         planets[i].yposSave.push_back(planets[i].ypos);
     }

@@ -1,6 +1,4 @@
 #pragma once 
-
-//#include "stdafx.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -13,6 +11,7 @@
 	Mass
 
 	Also holds all previous positions
+		in a vector to allow easy save output
 
 */
 
