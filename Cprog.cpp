@@ -104,7 +104,7 @@ void Cprog::twoBody(){
     cin >> totalDays;
     cout << "\n";
 
-    int totalLoops = 0;
+    float totalLoops = 0;
 
     totalLoops  = (totalDays*Day_Second_Converstion)/timeStep;
 
@@ -114,7 +114,7 @@ void Cprog::twoBody(){
         planets[i].yposSave.push_back(planets[i].ypos);
     }
 
-    cout << "X Accel       Y Accel       XVel     YVel    XPos  vPos";
+    cout << "X Accel       Y Accel       XVel     YVel    XPos  vPos\n";
 
     for (int i = 0; i < totalLoops; i++) {
         Accelerate();

@@ -49,9 +49,9 @@ class Cprog{
     int bodies;
 
     // Time Step in seconds
-	int timeStep;
+	float timeStep;
     // Total days to run simulation
-    int totalDays;
+    float totalDays;
 
     // Time Step in days (Used to calculate loops of calculations)
     int timeStepDays;
