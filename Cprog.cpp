@@ -154,7 +154,7 @@ void Cprog::saveFile(int totalLoops){
 
 	for (int i = 0; i < totalLoops; i++) {
         for(int j = 0; j < bodies; j++){
-		    saved << std::scientific << planets[j].xposSave[i] << "," << planets[j].yposSave[i];
+		    saved << std::setprecision(16) << planets[j].xposSave[i] << "," << planets[j].yposSave[i];
             cout << "Saving\r";
             if(j != bodies-1){
                 saved << ",";

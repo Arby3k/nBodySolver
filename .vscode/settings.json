@@ -46,6 +46,12 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "cctype": "cpp",
+        "complex": "cpp",
+        "deque": "cpp",
+        "map": "cpp",
+        "tuple": "cpp",
+        "xtree": "cpp"
     }
 }
