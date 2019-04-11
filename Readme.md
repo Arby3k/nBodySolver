@@ -9,18 +9,17 @@ Newton's laws of motion allow us to calculate the postion of celestial bodies at
 
 
 Features:
- * Solves Preloaded 3 body system ,
- * Solves nBody system loaded through txt file
+ * Simulates the motion of Preloaded 3 body system
+ * Simulates the motion of nBody system loaded through txt file
+ * Simulates the motion of satelites around a planet
  
 
 ## Usage
 
-For both options available to the user, the user must select total time to run simulation along with a timestep that will dictate the accuracy of the results. 
-
-A sample file for the solar system is also included with the name 'datasolar.txt'
+For all options available to the user, the user must select total time to run simulation along with a timestep that will dictate the accuracy of the results. 
 
 
-### Input Files
+## Input Files
 Input text files must follow formatting as shown below 
 
 ```sh
@@ -46,6 +45,14 @@ Input text files must follow formatting as shown below
 
 Each Body must have intial velocity and postion conditions stated.
 
+### Included input files
+
+`Data3Body.txt` - This file is required to run the 3body solver as the program looks for this specific input file to run the program.
+
+`Datasolar.txt` - This file is used to simulate our home solar system with 8 planets and a central Sun.
+
+
+
 ## Output files
 
 The Output files will be output as show below. This is to allow the `planetary motion viewer` software to run a visual simulation of your output. 
@@ -62,5 +69,4 @@ The Output files will be output as show below. This is to allow the `planetary m
 ```
 X and Y positions for each time step and each body are output on a per line basis. 
 The first Line is time step used for calculations, while the second line is the total number of bodies in the program. 
-
 
