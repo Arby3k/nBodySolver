@@ -36,6 +36,7 @@ class Cprog{
 
     // Using unit vectors, solves for x/y accelerations on each body
     // For each time step
+    // The Exact method is explained in Readme
     void Accelerate();
 
     // Using the calcualted accelerations, solves for x/y velocities 

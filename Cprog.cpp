@@ -117,18 +117,14 @@ void Cprog::nBody_Planetary(){
         planets[i].yposSave.push_back(planets[i].ypos);
     }
 
-    //cout << "X Accel       Y Accel       XVel     YVel    XPos  vPos\n";
 
     for (int i = 0; i < totalLoops; i++) {
         Accelerate();
         planets[0].xacc = 0; //Keep First Body Centered
         planets[0].yacc = 0; //Keep First Body Centered
-
-        //cout << planets[2].xacc <<"      " << planets[2].yacc <<"      ";
+        
         Velocities();
-        //cout << planets[2].xvel <<"      " << planets[2].yvel <<"      ";
-		Positions();
-        //cout << planets[2].xpos <<"      " << planets[2].ypos << "\n";
+        Positions();
 		cout << "Running\r";
  	}
 	
